@@ -1,7 +1,7 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es6": true
     },
     "extends": [
         "plugin:react/recommended",
@@ -30,9 +30,14 @@
         "prettier"
     ],
     "rules": {
-        "prettier/prettier": "error",
+        "prettier/prettier": ["error", 
+    {
+        "singleQuote": false,
+        "trailingComma": "es5"
+    }],
         "react/react-in-jsx-scope": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
-        "@typescript-eslint/consistent-type-assertions": "off"
+        "@typescript-eslint/consistent-type-assertions": "off",
+        "@typescript-eslint/strict-boolean-expressions": "off"
     }
 }
