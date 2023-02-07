@@ -5,6 +5,8 @@ import {
   Icon,
   Paper,
   Skeleton,
+  Typography,
+  useMediaQuery,
   useTheme,
 } from "@mui/material";
 
@@ -50,6 +52,8 @@ export function DetailTools({
   onClickSaveAndClose,
 }: IDetailToolsProps) {
   const theme = useTheme();
+  const smDown = useMediaQuery(theme.breakpoints.down("sm"));
+  const mdDown = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <Box
@@ -70,22 +74,41 @@ export function DetailTools({
           onClick={onClickSave}
           startIcon={<Icon>save</Icon>}
         >
-          Salvar
+          <Typography
+            variant="button"
+            whiteSpace="nowrap"
+            textOverflow="ellipsis"
+            overflow="hidden"
+          >
+            Salvar
+          </Typography>
         </Button>
       )}
       {showLoadButtonSave && <Skeleton width={110} height={62} />}
-      {showButtonSaveAndClose && !showLoadButtonSaveAndClose && (
-        <Button
-          variant="outlined"
-          disableElevation
-          color="primary"
-          onClick={onClickSaveAndClose}
-          startIcon={<Icon>save</Icon>}
-        >
-          Salvar e voltar
-        </Button>
+      {showButtonSaveAndClose &&
+        !showLoadButtonSaveAndClose &&
+        !mdDown &&
+        !smDown && (
+          <Button
+            variant="outlined"
+            disableElevation
+            color="primary"
+            onClick={onClickSaveAndClose}
+            startIcon={<Icon>save</Icon>}
+          >
+            <Typography
+              variant="button"
+              whiteSpace="nowrap"
+              textOverflow="ellipsis"
+              overflow="hidden"
+            >
+              Salvar e voltar
+            </Typography>
+          </Button>
+        )}
+      {showLoadButtonSaveAndClose && !mdDown && !smDown && (
+        <Skeleton width={180} height={62} />
       )}
-      {showLoadButtonSaveAndClose && <Skeleton width={180} height={62} />}
       {showButtonDelete && !showLoadButtonDelete && (
         <Button
           variant="outlined"
@@ -94,11 +117,18 @@ export function DetailTools({
           onClick={onClickDelete}
           startIcon={<Icon>delete</Icon>}
         >
-          Apagar
+          <Typography
+            variant="button"
+            whiteSpace="nowrap"
+            textOverflow="ellipsis"
+            overflow="hidden"
+          >
+            Apagar
+          </Typography>
         </Button>
       )}
       {showLoadButtonDelete && <Skeleton width={110} height={62} />}
-      {showButtonNew && !showLoadButtonNew && (
+      {showButtonNew && !showLoadButtonNew && !smDown && (
         <Button
           variant="outlined"
           disableElevation
@@ -106,11 +136,24 @@ export function DetailTools({
           onClick={onClickNew}
           startIcon={<Icon>add</Icon>}
         >
-          {newButtonText}
+          <Typography
+            variant="button"
+            whiteSpace="nowrap"
+            textOverflow="ellipsis"
+            overflow="hidden"
+          >
+            {newButtonText}
+          </Typography>
         </Button>
       )}
-      {showLoadButtonNew && <Skeleton width={110} height={62} />}
-      <Divider variant="middle" orientation="vertical" />
+      {showLoadButtonNew && !smDown && <Skeleton width={110} height={62} />}
+      {showButtonSave ||
+        showButtonSaveAndClose ||
+        showLoadButtonDelete ||
+        showButtonNew ||
+        (!showButtonBack && (
+          <Divider variant="middle" orientation="vertical" />
+        ))}
       {showButtonBack && !showLoadButtonBack && (
         <Button
           variant="outlined"
@@ -119,7 +162,14 @@ export function DetailTools({
           onClick={onClickBack}
           startIcon={<Icon>arrow_back</Icon>}
         >
-          Voltar
+          <Typography
+            variant="button"
+            whiteSpace="nowrap"
+            textOverflow="ellipsis"
+            overflow="hidden"
+          >
+            Voltar
+          </Typography>
         </Button>
       )}
       {showLoadButtonBack && <Skeleton width={110} height={62} />}

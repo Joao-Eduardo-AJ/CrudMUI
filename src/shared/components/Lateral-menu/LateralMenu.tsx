@@ -76,7 +76,6 @@ export const LateralMenu = ({ children }: drawerProps) => {
           >
             <Avatar
               sx={{ height: theme.spacing(12), width: theme.spacing(12) }}
-              src="/static/images/avatar/1.jpg"
             />
           </Box>
           <Divider />
