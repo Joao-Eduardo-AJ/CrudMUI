@@ -11,11 +11,11 @@ import { useDrawerContext } from "../contexts";
 
 export interface layoutProps {
   title: string;
-  ListingTools: ReactNode | undefined;
+  ToolsBar: ReactNode | undefined;
   children: React.ReactNode;
 }
 
-export const BaseLayout = ({ children, title, ListingTools }: layoutProps) => {
+export const BaseLayout = ({ children, title, ToolsBar }: layoutProps) => {
   const theme = useTheme();
   const smDown = useMediaQuery(theme.breakpoints.down("sm"));
   const mdDown = useMediaQuery(theme.breakpoints.down("sm"));
@@ -43,7 +43,7 @@ export const BaseLayout = ({ children, title, ListingTools }: layoutProps) => {
           {title}
         </Typography>
       </Box>
-      {ListingTools && <Box>{ListingTools}</Box>}
+      {ToolsBar && <Box>{ToolsBar}</Box>}
       <Box flex={1} overflow="auto">
         {children}
       </Box>
