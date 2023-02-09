@@ -9,6 +9,8 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import { Box } from "@mui/system";
 
+import { Enviroment } from "../../environment";
+
 interface IListingTools {
   searchText?: string;
   showSearchInput?: boolean;
@@ -42,7 +44,7 @@ export const ListingTools = ({
       {showSearchInput && (
         <TextField
           size="small"
-          placeholder="Pesquisar..."
+          placeholder={Enviroment.SEARCH_INPUT}
           value={searchText}
           onChange={e => onChangeSearchText?.(e.target.value)}
           InputProps={{
