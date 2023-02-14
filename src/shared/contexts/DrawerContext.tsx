@@ -1,4 +1,9 @@
 import { createContext, useCallback, useState, useContext } from "react";
+interface IDrawerOption {
+  icon: string;
+  path: string;
+  label: string;
+}
 
 interface IDrawerContextData {
   isDrawerOpen: boolean;
@@ -9,12 +14,6 @@ interface IDrawerContextData {
 
 interface IDrawerProvider {
   children: React.ReactNode;
-}
-
-interface IDrawerOption {
-  icon: string;
-  path: string;
-  label: string;
 }
 
 const DrawerContext = createContext({} as IDrawerContextData);
