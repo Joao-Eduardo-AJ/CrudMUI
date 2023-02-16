@@ -1,2 +1,2 @@
 export * from "./Dashboard/Dashboard";
-export * from "./Cities/CitiesListing";
+export * from "./People/PeopleListing";

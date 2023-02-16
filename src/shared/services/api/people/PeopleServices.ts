@@ -107,4 +107,10 @@ const deleteById = async (id: number): Promise<void | Error> => {
   }
 };
 
-export const PepleService = { getAll, getById, create, updateById, deleteById };
+export const PeopleService = {
+  getAll,
+  getById,
+  create,
+  updateById,
+  deleteById,
+};

@@ -1,9 +1,10 @@
 {
-    "people": [
-        {
-            "id": 1,
-            "name": "Juca",
-            "lastName": "Silva"
-        }
-    ]
+  "people": [
+    {
+      "id": 12,
+      "email": "joao@gmail.com",
+      "idCity": 24,
+      "wholeName": "João Eduardo"
+    }
+  ]
 }
