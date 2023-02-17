@@ -1,4 +1,4 @@
-export const Enviroment = {
+export const Environment = {
   /**
    * Defines the number of lines to be loaded by default in the listings
    */

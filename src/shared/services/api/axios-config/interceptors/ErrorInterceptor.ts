@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 
-export async function errorInterceptor(error: AxiosError) {
+export const errorInterceptor = async (error: AxiosError) => {
   if (error.message === "Network Error") {
     return await Promise.reject(new Error("Erro de conexão"));
   }
@@ -10,4 +10,4 @@ export async function errorInterceptor(error: AxiosError) {
   }
 
   return await Promise.reject(error);
-}
+};

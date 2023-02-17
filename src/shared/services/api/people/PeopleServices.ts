@@ -1,24 +1,24 @@
 /* eslint-disable @typescript-eslint/no-invalid-void-type */
-import { Enviroment } from "../../../environment";
+import { Environment } from "../../../environment";
 import { Api } from "../axios-config";
 
-interface IPeopleListing {
+export interface IPeopleListing {
   id: number;
   email: string;
-  wholeName: string;
   idCity: number;
+  wholeName: string;
 }
 
-interface IPeopleDetail {
+export interface IPeopleDetail {
   id: number;
   email: string;
-  wholeName: string;
   idCity: number;
+  wholeName: string;
 }
 
 interface TPeopleTotalCount {
-  data: IPeopleListing[];
   totalCount: number;
+  data: IPeopleListing[];
 }
 
 const getAll = async (
@@ -26,14 +26,14 @@ const getAll = async (
   filter = ""
 ): Promise<TPeopleTotalCount | Error> => {
   try {
-    const urlRelativa = `/people?_page=${page}&_limit=${Enviroment.LINES_LIMIT}&nomeCompleto_like=${filter}`;
+    const relativeUrl = `/people?_page=${page}&_limit=${Environment.LINES_LIMIT}&wholeName_like=${filter}`;
 
-    const { data, headers } = await Api.get(urlRelativa);
+    const { data, headers } = await Api.get(relativeUrl);
 
     if (data) {
       return {
         data,
-        totalCount: +headers["x-total-count"] || Enviroment.LINES_LIMIT,
+        totalCount: Number(headers["x-total-count"] || Environment.LINES_LIMIT),
       };
     }
 
@@ -54,11 +54,11 @@ const getById = async (id: number): Promise<IPeopleDetail | Error> => {
       return data;
     }
 
-    return new Error("Erro ao listar os registros");
+    return new Error("Erro ao consultar os registros");
   } catch (error) {
     console.error(error);
     return new Error(
-      (error as { message: string }).message || "Erro ao listar os registros"
+      (error as { message: string }).message || "Erro ao consultar os registros"
     );
   }
 };
@@ -77,7 +77,7 @@ const create = async (
   } catch (error) {
     console.error(error);
     return new Error(
-      (error as { message: string }).message || "Erro ao criar os registros"
+      (error as { message: string }).message || "Erro ao criar o registro"
     );
   }
 };
@@ -102,7 +102,7 @@ const deleteById = async (id: number): Promise<void | Error> => {
   } catch (error) {
     console.error(error);
     return new Error(
-      (error as { message: string }).message || "Erro ao deletar os registros"
+      (error as { message: string }).message || "Erro ao deletar o registro"
     );
   }
 };
