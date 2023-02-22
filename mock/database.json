@@ -1,36 +1,6 @@
 {
   "people": [
     {
-      "id": 1,
-      "idCity": 1,
-      "email": "joao@gmail.com",
-      "wholeName": "João Eduardo"
-    },
-    {
-      "id": 2,
-      "idCity": 1,
-      "email": "mariana@gmail.com",
-      "wholeName": "Mariana Veríssimo"
-    },
-    {
-      "id": 3,
-      "idCity": 1,
-      "email": "lucasv@gmail.com",
-      "wholeName": "Lucas Vieira"
-    },
-    {
-      "id": 4,
-      "idCity": 1,
-      "email": "tamires@gmail.com",
-      "wholeName": "Tamires Viegas"
-    },
-    {
-      "id": 5,
-      "idCity": 1,
-      "email": "victor@gmail.com",
-      "wholeName": "Victor Stobienia"
-    },
-    {
       "id": 6,
       "idCity": 1,
       "email": "vanessa@gmail.com",

@@ -1,7 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import {
+  Icon,
+  IconButton,
   LinearProgress,
+  Pagination,
   Paper,
   Table,
   TableBody,
@@ -24,6 +27,7 @@ import { Environment } from "../../shared/environment";
 export const PeopleListing = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { debounce } = useDebounce();
+  const navigate = useNavigate();
 
   const [rows, setRows] = useState<IPeopleListing[]>([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -54,7 +58,19 @@ export const PeopleListing = () => {
         }
       });
     });
-  }, [search]);
+  }, [search, page]);
+
+  const handleDelete = (id: number) => {
+    if (confirm("Realmente deseja apagar?")) {
+      void PeopleService.deleteById(id).then(result => {
+        if (result instanceof Error) {
+          alert(result.message);
+        } else {
+          setRows(oldRows => [...oldRows.filter(oldRow => oldRow.id !== id)]);
+        }
+      });
+    }
+  };
 
   return (
     <BaseLayout
@@ -65,7 +81,7 @@ export const PeopleListing = () => {
           searchText={search}
           newbuttonText="Nova"
           onChangeSearchText={text =>
-            setSearchParams({ search: text }, { replace: true })
+            setSearchParams({ search: text, page: "1" }, { replace: true })
           }
         />
       }
@@ -87,7 +103,22 @@ export const PeopleListing = () => {
             {rows.map(row => {
               return (
                 <TableRow key={row.idCity}>
-                  <TableCell>{row.id}</TableCell>
+                  <TableCell>
+                    <IconButton
+                      size="small"
+                      sx={{ padding: "0", marginRight: "0.8rem" }}
+                      onClick={() => handleDelete(row.id)}
+                    >
+                      <Icon>delete</Icon>
+                    </IconButton>
+                    <IconButton
+                      size="small"
+                      sx={{ padding: "0" }}
+                      onClick={() => navigate(`/people/detail/id${row.id}`)}
+                    >
+                      <Icon>edit</Icon>
+                    </IconButton>
+                  </TableCell>
                   <TableCell>{row.wholeName}</TableCell>
                   <TableCell>{row.email}</TableCell>
                 </TableRow>
@@ -103,6 +134,25 @@ export const PeopleListing = () => {
               <TableRow>
                 <TableCell colSpan={3}>
                   <LinearProgress variant="indeterminate" />
+                </TableCell>
+              </TableRow>
+            )}
+            {totalCount === 0 && !isLoading && (
+              <caption>{Environment.EMPITY_LISTING}</caption>
+            )}
+            {totalCount > 0 && totalCount > Environment.LINES_LIMIT && (
+              <TableRow>
+                <TableCell colSpan={3}>
+                  <Pagination
+                    page={page}
+                    count={Math.ceil(totalCount / Environment.LINES_LIMIT)}
+                    onChange={(_, newPage) =>
+                      setSearchParams(
+                        { search, page: newPage.toString() },
+                        { replace: true }
+                      )
+                    }
+                  />
                 </TableCell>
               </TableRow>
             )}
