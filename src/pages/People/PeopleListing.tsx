@@ -66,6 +66,7 @@ export const PeopleListing = () => {
         if (result instanceof Error) {
           alert(result.message);
         } else {
+          alert("Registro apagado com sucesso!");
           setRows(oldRows => [...oldRows.filter(oldRow => oldRow.id !== id)]);
         }
       });
@@ -83,6 +84,7 @@ export const PeopleListing = () => {
           onChangeSearchText={text =>
             setSearchParams({ search: text, page: "1" }, { replace: true })
           }
+          onClickNew={() => navigate("/people/detail/new")}
         />
       }
     >
