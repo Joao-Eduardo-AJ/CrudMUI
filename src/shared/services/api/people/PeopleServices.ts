@@ -2,14 +2,7 @@
 import { Environment } from "../../../environment";
 import { Api } from "../axios-config";
 
-export interface IPeopleListing {
-  id: number;
-  email: string;
-  idCity: number;
-  wholeName: string;
-}
-
-export interface IPeopleDetail {
+export interface IPeople {
   id: number;
   email: string;
   idCity: number;
@@ -18,7 +11,7 @@ export interface IPeopleDetail {
 
 interface TPeopleTotalCount {
   totalCount: number;
-  data: IPeopleListing[];
+  data: IPeople[];
 }
 
 const getAll = async (
@@ -46,7 +39,7 @@ const getAll = async (
   }
 };
 
-const getById = async (id: number): Promise<IPeopleDetail | Error> => {
+const getById = async (id: number): Promise<IPeople | Error> => {
   try {
     const { data } = await Api.get(`/people/${id}`);
 
@@ -64,7 +57,7 @@ const getById = async (id: number): Promise<IPeopleDetail | Error> => {
 };
 
 const create = async (
-  information: Omit<IPeopleDetail, "id">
+  information: Omit<IPeople, "id">
 ): Promise<number | Error> => {
   try {
     const { data } = await Api.post("/people", information);
@@ -84,7 +77,7 @@ const create = async (
 
 const updateById = async (
   id: number,
-  information: IPeopleDetail
+  information: IPeople
 ): Promise<void | Error> => {
   try {
     await Api.put(`/people/${id}`, information);

@@ -27,8 +27,14 @@ export const VTextField = ({ name, ...props }: TVTextFieldProps) => {
       helperText={error}
       defaultValue={defaultValue}
       value={value}
-      onChange={e => setValue(e.target.value)}
-      onKeyDown={() => (error ? clearError() : undefined)}
+      onChange={e => {
+        setValue(e.target.value);
+        props.onChange?.(e);
+      }}
+      onKeyDown={e => {
+        error && clearError();
+        props.onKeyDown?.(e);
+      }}
     />
   );
 };

@@ -19,7 +19,7 @@ import { ListingTools } from "../../shared/components";
 import { BaseLayout } from "../../shared/layouts";
 import { useDebounce } from "../../shared/hooks";
 import {
-  IPeopleListing,
+  IPeople,
   PeopleService,
 } from "../../shared/services/api/people/PeopleServices";
 import { Environment } from "../../shared/environment";
@@ -29,7 +29,7 @@ export const PeopleListing = () => {
   const { debounce } = useDebounce();
   const navigate = useNavigate();
 
-  const [rows, setRows] = useState<IPeopleListing[]>([]);
+  const [rows, setRows] = useState<IPeople[]>([]);
   const [totalCount, setTotalCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -104,7 +104,7 @@ export const PeopleListing = () => {
           <TableBody>
             {rows.map(row => {
               return (
-                <TableRow key={row.idCity}>
+                <TableRow key={row.id}>
                   <TableCell>
                     <IconButton
                       size="small"
@@ -116,7 +116,7 @@ export const PeopleListing = () => {
                     <IconButton
                       size="small"
                       sx={{ padding: "0" }}
-                      onClick={() => navigate(`/people/detail/id${row.id}`)}
+                      onClick={() => navigate(`/people/detail/${row.id}`)}
                     >
                       <Icon>edit</Icon>
                     </IconButton>
@@ -146,6 +146,7 @@ export const PeopleListing = () => {
               <TableRow>
                 <TableCell colSpan={3}>
                   <Pagination
+                    size="small"
                     page={page}
                     count={Math.ceil(totalCount / Environment.LINES_LIMIT)}
                     onChange={(_, newPage) =>
