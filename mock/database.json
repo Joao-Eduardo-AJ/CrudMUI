@@ -1,10 +1,9 @@
 {
   "people": [
     {
-      "id": 2,
-      "idCity": 1,
+      "wholeName": "",
       "email": "mariana@gmail.com",
-      "wholeName": "Mariana Veríssimo"
+      "id": 2
     },
     {
       "wholeName": "Lucas Vieira",

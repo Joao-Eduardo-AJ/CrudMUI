@@ -1,14 +1,24 @@
 import { Box, Grid, LinearProgress, Paper, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import * as yup from "yup";
 
+import { VTextField, VForm, useVForm, IVFormErrors } from "../../shared/forms";
 import { DetailTools } from "../../shared/components";
-import { VTextField, VForm, useVForm } from "../../shared/forms";
 import { BaseLayout } from "../../shared/layouts";
-import {
-  IPeople,
-  PeopleService,
-} from "../../shared/services/api/people/PeopleServices";
+import { PeopleService } from "../../shared/services/api/people/PeopleServices";
+
+interface IFormData {
+  wholeName: string;
+  email: string;
+  idCity: number;
+}
+
+const formValidationSchema: yup.ObjectSchema<IFormData> = yup.object().shape({
+  wholeName: yup.string().required().min(5),
+  email: yup.string().required().email(),
+  idCity: yup.number().required(),
+});
 
 export const PeopleDetail = () => {
   const { id = "new" } = useParams<"id">();
@@ -42,36 +52,54 @@ export const PeopleDetail = () => {
     }
   }, [id]);
 
-  const handleSave = (data: IPeople) => {
-    setIsLoading(true);
+  const handleSave = (data: IFormData) => {
+    void formValidationSchema
+      .validate(data, { abortEarly: false })
+      .then(validatedData => {
+        setIsLoading(true);
 
-    if (id === "new") {
-      void PeopleService.create(data).then(result => {
-        setIsLoading(false);
+        if (id === "new") {
+          void PeopleService.create(validatedData).then(result => {
+            setIsLoading(false);
 
-        if (result instanceof Error) {
-          alert(result.message);
+            if (result instanceof Error) {
+              alert(result.message);
+            } else {
+              if (isSaveAndClose()) {
+                navigate("./people");
+              } else {
+                navigate(`/people/detail/${result}`);
+              }
+            }
+          });
         } else {
-          if (isSaveAndClose()) {
-            navigate("./people");
-          } else {
-            navigate(`/people/detail/${result}`);
-          }
-        }
-      });
-    } else {
-      void PeopleService.updateById(+id, data).then(result => {
-        setIsLoading(false);
+          void PeopleService.updateById(+id, {
+            id: +id,
+            ...validatedData,
+          }).then(result => {
+            setIsLoading(false);
 
-        if (result instanceof Error) {
-          alert(result.message);
-        } else {
-          if (isSaveAndClose()) {
-            navigate("./people");
-          }
+            if (result instanceof Error) {
+              alert(result.message);
+            } else {
+              if (isSaveAndClose()) {
+                navigate("./people");
+              }
+            }
+          });
         }
+      })
+      .catch((errors: yup.ValidationError) => {
+        const validationErrors: IVFormErrors = {};
+
+        errors.inner.forEach(error => {
+          if (!error.path) return;
+
+          validationErrors[error.path] = error.message;
+        });
+
+        formRef.current?.setErrors(validationErrors);
       });
-    }
   };
 
   const handleDelete = (id: number) => {
