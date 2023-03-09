@@ -6,21 +6,17 @@ import * as yup from "yup";
 import { VTextField, VForm, useVForm, IVFormErrors } from "../../shared/forms";
 import { DetailTools } from "../../shared/components";
 import { BaseLayout } from "../../shared/layouts";
-import { PeopleService } from "../../shared/services/api/people/PeopleService";
+import { CitiesService } from "../../shared/services/api/cities/CitiesService";
 
 interface IFormData {
-  wholeName: string;
-  email: string;
-  idCity: number;
+  name: string;
 }
 
 const formValidationSchema: yup.ObjectSchema<IFormData> = yup.object().shape({
-  wholeName: yup.string().required().min(5),
-  email: yup.string().required().email(),
-  idCity: yup.number().required(),
+  name: yup.string().required().min(5),
 });
 
-export const PeopleDetail = () => {
+export const CitiesDetail = () => {
   const { id = "new" } = useParams<"id">();
   const navigate = useNavigate();
   const { formRef, save, saveAndClose, isSaveAndClose } = useVForm();
@@ -31,13 +27,13 @@ export const PeopleDetail = () => {
   useEffect(() => {
     if (id !== "new") {
       setIsLoading(true);
-      void PeopleService.getById(+id).then(result => {
+      void CitiesService.getById(+id).then(result => {
         setIsLoading(false);
         if (result instanceof Error) {
           alert(result.message);
-          navigate("./people");
+          navigate("./cities");
         } else {
-          setName(result.wholeName);
+          setName(result.name);
           console.log(result);
 
           formRef.current?.setData(result);
@@ -45,9 +41,7 @@ export const PeopleDetail = () => {
       });
     } else {
       formRef.current?.setData({
-        wholeName: "",
-        email: "",
-        idCity: "",
+        name: "",
       });
     }
   }, [id]);
@@ -59,21 +53,21 @@ export const PeopleDetail = () => {
         setIsLoading(true);
 
         if (id === "new") {
-          void PeopleService.create(validatedData).then(result => {
+          void CitiesService.create(validatedData).then(result => {
             setIsLoading(false);
 
             if (result instanceof Error) {
               alert(result.message);
             } else {
               if (isSaveAndClose()) {
-                navigate("./people");
+                navigate("./cities");
               } else {
-                navigate(`/people/detail/${result}`);
+                navigate(`/cities/detail/${result}`);
               }
             }
           });
         } else {
-          void PeopleService.updateById(+id, {
+          void CitiesService.updateById(+id, {
             id: +id,
             ...validatedData,
           }).then(result => {
@@ -83,7 +77,7 @@ export const PeopleDetail = () => {
               alert(result.message);
             } else {
               if (isSaveAndClose()) {
-                navigate("./people");
+                navigate("./cities");
               }
             }
           });
@@ -104,12 +98,12 @@ export const PeopleDetail = () => {
 
   const handleDelete = (id: number) => {
     if (confirm("Realmente deseja apagar?")) {
-      void PeopleService.deleteById(id).then(result => {
+      void CitiesService.deleteById(id).then(result => {
         if (result instanceof Error) {
           alert(result.message);
         } else {
           alert("Registro apagado com sucesso!");
-          navigate("./people");
+          navigate("./cities");
         }
       });
     }
@@ -127,8 +121,8 @@ export const PeopleDetail = () => {
           onClickSave={save}
           onClickSaveAndClose={saveAndClose}
           onClickDelete={() => handleDelete(+id)}
-          onClickNew={() => navigate("/people/detail/new")}
-          onClickBack={() => navigate("/people")}
+          onClickNew={() => navigate("/cities/detail/new")}
+          onClickBack={() => navigate("/cities")}
         />
       }
     >
@@ -147,31 +141,11 @@ export const PeopleDetail = () => {
             <Grid container item direction="row" spacing={2}>
               <Grid item xs={12} sm={10} md={6} lg={4} xl={3}>
                 <VTextField
-                  label="wholeName"
-                  name="wholeName"
+                  label="Name"
+                  name="Name"
                   fullWidth
                   disabled={isLoading}
                   onChange={e => setName(e.target.value)}
-                />
-              </Grid>
-            </Grid>
-            <Grid container item direction="row" spacing={2}>
-              <Grid item xs={12} sm={10} md={6} lg={4} xl={3}>
-                <VTextField
-                  label="email"
-                  name="email"
-                  fullWidth
-                  disabled={isLoading}
-                />
-              </Grid>
-            </Grid>
-            <Grid container item direction="row" spacing={2}>
-              <Grid item xs={12} sm={10} md={6} lg={4} xl={3}>
-                <VTextField
-                  label="city"
-                  name="city"
-                  fullWidth
-                  disabled={isLoading}
                 />
               </Grid>
             </Grid>

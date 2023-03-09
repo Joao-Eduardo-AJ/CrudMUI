@@ -19,17 +19,17 @@ import { ListingTools } from "../../shared/components";
 import { BaseLayout } from "../../shared/layouts";
 import { useDebounce } from "../../shared/hooks";
 import {
-  IPeople,
-  PeopleService,
-} from "../../shared/services/api/people/PeopleService";
+  ICities,
+  CitiesService,
+} from "../../shared/services/api/cities/CitiesService";
 import { Environment } from "../../shared/environment";
 
-export const PeopleListing = () => {
+export const CitiesListing = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { debounce } = useDebounce();
   const navigate = useNavigate();
 
-  const [rows, setRows] = useState<IPeople[]>([]);
+  const [rows, setRows] = useState<ICities[]>([]);
   const [totalCount, setTotalCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -45,7 +45,7 @@ export const PeopleListing = () => {
     setIsLoading(true);
 
     debounce(() => {
-      void PeopleService.getAll(page, search).then(result => {
+      void CitiesService.getAll(page, search).then(result => {
         setIsLoading(false);
 
         if (result instanceof Error) {
@@ -62,7 +62,7 @@ export const PeopleListing = () => {
 
   const handleDelete = (id: number) => {
     if (confirm("Realmente deseja apagar?")) {
-      void PeopleService.deleteById(id).then(result => {
+      void CitiesService.deleteById(id).then(result => {
         if (result instanceof Error) {
           alert(result.message);
         } else {
@@ -84,7 +84,7 @@ export const PeopleListing = () => {
           onChangeSearchText={text =>
             setSearchParams({ search: text, page: "1" }, { replace: true })
           }
-          onClickNew={() => navigate("/people/detail/new")}
+          onClickNew={() => navigate("/cities/detail/new")}
         />
       }
     >
@@ -116,13 +116,12 @@ export const PeopleListing = () => {
                     <IconButton
                       size="small"
                       sx={{ padding: "0" }}
-                      onClick={() => navigate(`/people/detail/${row.id}`)}
+                      onClick={() => navigate(`/cities/detail/${row.id}`)}
                     >
                       <Icon>edit</Icon>
                     </IconButton>
                   </TableCell>
-                  <TableCell>{row.wholeName}</TableCell>
-                  <TableCell>{row.email}</TableCell>
+                  <TableCell>{row.name}</TableCell>
                 </TableRow>
               );
             })}
