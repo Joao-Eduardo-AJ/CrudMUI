@@ -7,6 +7,7 @@ import { VTextField, VForm, useVForm, IVFormErrors } from "../../shared/forms";
 import { DetailTools } from "../../shared/components";
 import { BaseLayout } from "../../shared/layouts";
 import { PeopleService } from "../../shared/services/api/people/PeopleService";
+import { CityAutoComplete } from "./components/CityAutoComplete";
 
 interface IFormData {
   wholeName: string;
@@ -47,7 +48,7 @@ export const PeopleDetail = () => {
       formRef.current?.setData({
         wholeName: "",
         email: "",
-        idCity: "",
+        idCity: undefined,
       });
     }
   }, [id]);
@@ -167,12 +168,7 @@ export const PeopleDetail = () => {
             </Grid>
             <Grid container item direction="row" spacing={2}>
               <Grid item xs={12} sm={10} md={6} lg={4} xl={3}>
-                <VTextField
-                  label="city"
-                  name="city"
-                  fullWidth
-                  disabled={isLoading}
-                />
+                <CityAutoComplete isExternalLoading={isLoading} />
               </Grid>
             </Grid>
           </Grid>
