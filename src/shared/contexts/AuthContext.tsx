@@ -1,6 +1,7 @@
 import {
   createContext,
   useCallback,
+  useContext,
   useEffect,
   useMemo,
   useState,
@@ -21,12 +22,12 @@ interface IAuthProviderProps {
   children: React.ReactNode;
 }
 export const AuthProvider = ({ children }: IAuthProviderProps) => {
-  const [accessToken, setAccessToken] = useState<string>();
+  const [accessToken, setAccessToken] = useState<string>("");
 
   useEffect(() => {
     const accessToken = localStorage.getItem(LOCAL_STORAGE_KEY_ACCESS_TOKEN);
     if (accessToken) {
-      setAccessToken(JSON.parse(accessToken));
+      setAccessToken(JSON.stringify(accessToken));
     }
   }, []);
 
@@ -57,3 +58,5 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
     </AuthContext.Provider>
   );
 };
+
+export const useAuthContext = () => useContext(AuthContext);

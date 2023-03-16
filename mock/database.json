@@ -109,5 +109,5 @@
     }
     
   ],
-  "accessToken": "aaa-bbb-ccc"
+  "accessToken": ["aaa-bbb-ccc"]
 }
