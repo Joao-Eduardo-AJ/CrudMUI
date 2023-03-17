@@ -17,7 +17,7 @@ export const CityAutoComplete = ({
   isExternalLoading = false,
 }: ICityAutoCompleteProps) => {
   const { fieldName, registerField, defaultValue, error, clearError } =
-    useField("cityId");
+    useField("idCity");
   const { debounce } = useDebounce();
 
   const [options, setOptions] = useState<IAutoCompleteOptions[]>([]);

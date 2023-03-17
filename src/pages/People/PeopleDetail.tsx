@@ -54,6 +54,7 @@ export const PeopleDetail = () => {
   }, [id]);
 
   const handleSave = (data: IFormData) => {
+    console.log(data);
     void formValidationSchema
       .validate(data, { abortEarly: false })
       .then(validatedData => {
@@ -67,7 +68,7 @@ export const PeopleDetail = () => {
               alert(result.message);
             } else {
               if (isSaveAndClose()) {
-                navigate("./people");
+                navigate("/people");
               } else {
                 navigate(`/people/detail/${result}`);
               }
@@ -176,7 +177,6 @@ export const PeopleDetail = () => {
       </VForm>
 
       {isLoading && <LinearProgress variant="indeterminate" />}
-      {id}
     </BaseLayout>
   );
 };

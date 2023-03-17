@@ -27,6 +27,7 @@ export const CitiesDetail = () => {
   useEffect(() => {
     if (id !== "new") {
       setIsLoading(true);
+
       void CitiesService.getById(+id).then(result => {
         setIsLoading(false);
         if (result instanceof Error) {
@@ -34,8 +35,6 @@ export const CitiesDetail = () => {
           navigate("./cities");
         } else {
           setName(result.name);
-          console.log(result);
-
           formRef.current?.setData(result);
         }
       });
@@ -60,7 +59,7 @@ export const CitiesDetail = () => {
               alert(result.message);
             } else {
               if (isSaveAndClose()) {
-                navigate("./cities");
+                navigate("/cities");
               } else {
                 navigate(`/cities/detail/${result}`);
               }
@@ -77,7 +76,7 @@ export const CitiesDetail = () => {
               alert(result.message);
             } else {
               if (isSaveAndClose()) {
-                navigate("./cities");
+                navigate("/cities");
               }
             }
           });
@@ -103,7 +102,7 @@ export const CitiesDetail = () => {
           alert(result.message);
         } else {
           alert("Registro apagado com sucesso!");
-          navigate("./cities");
+          navigate("/cities");
         }
       });
     }
@@ -111,7 +110,7 @@ export const CitiesDetail = () => {
 
   return (
     <BaseLayout
-      title={id === "new" ? "Nova pessoa" : name}
+      title={id === "new" ? "Nova cidade" : name}
       ToolsBar={
         <DetailTools
           newButtonText="Nova"
@@ -127,14 +126,19 @@ export const CitiesDetail = () => {
       }
     >
       <VForm ref={formRef} onSubmit={handleSave}>
-        <Box margin={1} display="flex" flexDirection="column" component={Paper}>
+        <Box
+          margin={1}
+          display="flex"
+          flexDirection="column"
+          component={Paper}
+          variant="outlined"
+        >
           <Grid container direction="column" padding={2} spacing={2}>
             {isLoading && (
               <Grid item>
                 <LinearProgress variant="indeterminate" />
               </Grid>
             )}
-
             <Grid item>
               <Typography variant="h6">Geral</Typography>
             </Grid>
@@ -142,7 +146,7 @@ export const CitiesDetail = () => {
               <Grid item xs={12} sm={10} md={6} lg={4} xl={3}>
                 <VTextField
                   label="Name"
-                  name="Name"
+                  name="name"
                   fullWidth
                   disabled={isLoading}
                   onChange={e => setName(e.target.value)}
@@ -154,7 +158,6 @@ export const CitiesDetail = () => {
       </VForm>
 
       {isLoading && <LinearProgress variant="indeterminate" />}
-      {id}
     </BaseLayout>
   );
 };

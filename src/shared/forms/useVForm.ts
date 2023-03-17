@@ -8,20 +8,20 @@ export const useVForm = () => {
   const isSavingAndClose = useRef(false);
 
   const handleSave = useCallback(() => {
-    isSavingAndNew.current = false;
     isSavingAndClose.current = false;
+    isSavingAndNew.current = false;
     formRef.current?.submitForm();
   }, []);
 
   const handleSaveAndNew = useCallback(() => {
-    isSavingAndNew.current = true;
     isSavingAndClose.current = false;
+    isSavingAndNew.current = true;
     formRef.current?.submitForm();
   }, []);
 
   const handleSaveAndClose = useCallback(() => {
-    isSavingAndNew.current = false;
     isSavingAndClose.current = true;
+    isSavingAndNew.current = false;
     formRef.current?.submitForm();
   }, []);
 

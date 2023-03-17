@@ -51,8 +51,6 @@ export const CitiesListing = () => {
         if (result instanceof Error) {
           alert(result.message);
         } else {
-          console.log(result);
-
           setTotalCount(result.totalCount);
           setRows(result.data);
         }
@@ -75,7 +73,7 @@ export const CitiesListing = () => {
 
   return (
     <BaseLayout
-      title="Listagem de pessoas"
+      title="Listagem de cidades"
       ToolsBar={
         <ListingTools
           showSearchInput
@@ -97,8 +95,7 @@ export const CitiesListing = () => {
           <TableHead>
             <TableRow>
               <TableCell>Ações</TableCell>
-              <TableCell>Nome completo</TableCell>
-              <TableCell>Email</TableCell>
+              <TableCell>Nome</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -126,6 +123,7 @@ export const CitiesListing = () => {
               );
             })}
           </TableBody>
+
           {totalCount === 0 && !isLoading && (
             <caption>{Environment.EMPITY_LISTING}</caption>
           )}
@@ -138,9 +136,7 @@ export const CitiesListing = () => {
                 </TableCell>
               </TableRow>
             )}
-            {totalCount === 0 && !isLoading && (
-              <caption>{Environment.EMPITY_LISTING}</caption>
-            )}
+
             {totalCount > 0 && totalCount > Environment.LINES_LIMIT && (
               <TableRow>
                 <TableCell colSpan={3}>

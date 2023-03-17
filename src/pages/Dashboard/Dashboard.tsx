@@ -8,8 +8,8 @@ import { PeopleService } from "../../shared/services/api/people/PeopleService";
 
 export const Dashboard = () => {
   const [isCitiesLoading, setIsCitiesLoading] = useState(true);
-  const [totalCitiesCount, setTotalCitiesCount] = useState(0);
   const [isPeopleLoading, setIsPeopleLoading] = useState(true);
+  const [totalCitiesCount, setTotalCitiesCount] = useState(0);
   const [totalPeopleCount, setTotalPeopleCount] = useState(0);
 
   useEffect(() => {

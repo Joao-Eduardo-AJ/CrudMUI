@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import {
   Button,
   Card,
@@ -38,7 +39,7 @@ export const Login = ({ children }: ILoginProps) => {
     loginSchema
       .validate({ email, password }, { abortEarly: false })
       .then(validatedData => {
-        void login(validatedData.email, validatedData.password).then(() => {
+        login(validatedData.email, validatedData.password).then(() => {
           setIsLoading(false);
         });
       })

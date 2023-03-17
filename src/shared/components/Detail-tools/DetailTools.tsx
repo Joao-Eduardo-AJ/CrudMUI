@@ -37,7 +37,7 @@ export function DetailTools({
   showButtonBack = true,
   showButtonDelete = true,
   showButtonSave = true,
-  showButtonSaveAndClose = true,
+  showButtonSaveAndClose = false,
 
   showLoadButtonNew = false,
   showLoadButtonBack = false,
