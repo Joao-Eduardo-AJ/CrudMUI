@@ -28,7 +28,7 @@ yarn dev
 ```bash
 npm run server
 ```
-ou
+or
 ```bash
 yarn server
 ```
