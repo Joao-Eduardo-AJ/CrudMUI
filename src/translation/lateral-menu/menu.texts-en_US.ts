@@ -1,0 +1,8 @@
+export const Texts = {
+  DASHBOARD_NAVIGATE_BUTTON_TEXT: "Dashboard",
+  PEOPLE_NAVIGATE_BUTTON_TEXT: "People",
+  CITIES_NAVIGATE_BUTTON_TEXT: "Cities",
+
+  TOGGLE_THEME_BUTTON_TEXT: "Toggle theme",
+  LOGOUT_BUTTON_TEXT: "Logout",
+};

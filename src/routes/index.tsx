@@ -8,26 +8,28 @@ import {
   CitiesDetail,
   CitiesListing,
 } from "../pages";
+import { TextsProvider } from "../translation/lateral-menu";
 
 export const AppRoutes = () => {
   const { setDrawerOptions } = useDrawerContext();
+  const texts = TextsProvider.get();
 
   useEffect(() => {
     setDrawerOptions([
       {
         icon: "home",
         path: "/home",
-        label: "Página inicial",
+        label: `${texts.DASHBOARD_NAVIGATE_BUTTON_TEXT}`,
       },
       {
         icon: "people",
         path: "/people",
-        label: "Pessoas",
+        label: `${texts.PEOPLE_NAVIGATE_BUTTON_TEXT}`,
       },
       {
         icon: "location_city",
         path: "/cities",
-        label: "Cities",
+        label: `${texts.CITIES_NAVIGATE_BUTTON_TEXT}`,
       },
     ]);
   }, []);

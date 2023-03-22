@@ -18,6 +18,7 @@ import {
   useAuthContext,
   useDrawerContext,
 } from "../../contexts";
+import { TextsProvider } from "../../../translation/lateral-menu";
 
 export interface drawerProps {
   children: React.ReactNode;
@@ -54,6 +55,7 @@ const ListItemLink = ({ to, icon, label, onClick }: IListItemLinkProps) => {
 export const LateralMenu = ({ children }: drawerProps) => {
   const theme = useTheme();
   const smDown = useMediaQuery(theme.breakpoints.down("sm"));
+  const texts = TextsProvider.get();
 
   const { isDrawerOpen, drawerOptions, toggleDrawerOpen } = useDrawerContext();
   const { toggleTheme } = useAppThemeContext();
@@ -103,13 +105,13 @@ export const LateralMenu = ({ children }: drawerProps) => {
                 <ListItemIcon>
                   <Icon>dark_modes</Icon>
                 </ListItemIcon>
-                <ListItemText primary="Alterar tema" />
+                <ListItemText primary={texts.TOGGLE_THEME_BUTTON_TEXT} />
               </ListItemButton>
               <ListItemButton onClick={logout}>
                 <ListItemIcon>
                   <Icon>logout</Icon>
                 </ListItemIcon>
-                <ListItemText primary="Sair" />
+                <ListItemText primary={texts.LOGOUT_BUTTON_TEXT} />
               </ListItemButton>
             </List>
           </Box>
