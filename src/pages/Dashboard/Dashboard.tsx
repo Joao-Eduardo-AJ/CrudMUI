@@ -5,8 +5,10 @@ import { ListingTools } from "../../shared/components";
 import { BaseLayout } from "../../shared/layouts";
 import { CitiesService } from "../../shared/services/api/cities/CitiesService";
 import { PeopleService } from "../../shared/services/api/people/PeopleService";
+import { TextsProvider } from "../../translation/dashboard";
 
 export const Dashboard = () => {
+  const texts = TextsProvider.get();
   const [isCitiesLoading, setIsCitiesLoading] = useState(true);
   const [isPeopleLoading, setIsPeopleLoading] = useState(true);
   const [totalCitiesCount, setTotalCitiesCount] = useState(0);
@@ -38,7 +40,7 @@ export const Dashboard = () => {
 
   return (
     <BaseLayout
-      title="Página inicial"
+      title={texts.DASHBOARD_PAGE_TITLE}
       ToolsBar={<ListingTools showNewButton={false} />}
     >
       <Box width="100%" display="flex">
@@ -48,7 +50,7 @@ export const Dashboard = () => {
               <Card>
                 <CardContent>
                   <Typography variant="h5" align="center">
-                    Total de pessoas
+                    {texts.PEOPLE_TOTAL_COUNT_CARD_TEXT}
                   </Typography>
                   <Box
                     padding={6}
@@ -70,7 +72,7 @@ export const Dashboard = () => {
               <Card>
                 <CardContent>
                   <Typography variant="h5" align="center">
-                    Total de cidades
+                    {texts.CITY_TOTAL_COUNT_CARD_TEXT}
                   </Typography>
                   <Box
                     padding={6}

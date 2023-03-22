@@ -1,7 +1,7 @@
-import { Texts as Texts_en_US } from "./menu.texts-en_US";
-import { Texts as Texts_pt_BR } from "./menu.texts-pt_BR";
+import { Texts as Texts_en_US } from "./dashboard.texts-en_US";
+import { Texts as Texts_pt_BR } from "./dashboard.texts-pt_BR";
 
-type TextsType = typeof Texts_pt_BR;
+export type TextsType = typeof Texts_pt_BR;
 
 const map = new Map<string, TextsType>();
 
