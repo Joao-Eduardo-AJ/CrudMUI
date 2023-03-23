@@ -23,11 +23,13 @@ import {
   PeopleService,
 } from "../../shared/services/api/people/PeopleService";
 import { Environment } from "../../shared/environment";
+import { TextsProvider } from "../../translation/people-listing";
 
 export const PeopleListing = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { debounce } = useDebounce();
   const navigate = useNavigate();
+  const texts = TextsProvider.get();
 
   const [rows, setRows] = useState<IPeople[]>([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -94,9 +96,9 @@ export const PeopleListing = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Ações</TableCell>
-              <TableCell>Nome completo</TableCell>
-              <TableCell>Email</TableCell>
+              <TableCell>{texts.ACTIONS}</TableCell>
+              <TableCell>{texts.WHOLE_NAME}</TableCell>
+              <TableCell>{texts.EMAIL}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

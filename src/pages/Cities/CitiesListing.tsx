@@ -23,11 +23,13 @@ import {
   CitiesService,
 } from "../../shared/services/api/cities/CitiesService";
 import { Environment } from "../../shared/environment";
+import { TextsProvider } from "../../translation/cities-listing";
 
 export const CitiesListing = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { debounce } = useDebounce();
   const navigate = useNavigate();
+  const texts = TextsProvider.get();
 
   const [rows, setRows] = useState<ICities[]>([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -94,8 +96,8 @@ export const CitiesListing = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Ações</TableCell>
-              <TableCell>Nome</TableCell>
+              <TableCell>{texts.ACTIONS}</TableCell>
+              <TableCell>{texts.CITY_NAME}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
