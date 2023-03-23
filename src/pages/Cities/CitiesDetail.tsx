@@ -7,6 +7,7 @@ import { VTextField, VForm, useVForm, IVFormErrors } from "../../shared/forms";
 import { DetailTools } from "../../shared/components";
 import { BaseLayout } from "../../shared/layouts";
 import { CitiesService } from "../../shared/services/api/cities/CitiesService";
+import { TextsProvider } from "../../translation/cities-listing";
 
 interface IFormData {
   name: string;
@@ -20,6 +21,7 @@ export const CitiesDetail = () => {
   const { id = "new" } = useParams<"id">();
   const navigate = useNavigate();
   const { formRef, save, saveAndClose, isSaveAndClose } = useVForm();
+  const texts = TextsProvider.get();
 
   const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState("");
@@ -110,7 +112,7 @@ export const CitiesDetail = () => {
 
   return (
     <BaseLayout
-      title={id === "new" ? "Nova cidade" : name}
+      title={id === "new" ? texts.NEW_CITY_TITLE_TEXT : name}
       ToolsBar={
         <DetailTools
           showButtonSaveAndClose
@@ -139,12 +141,12 @@ export const CitiesDetail = () => {
               </Grid>
             )}
             <Grid item>
-              <Typography variant="h6">Geral</Typography>
+              <Typography variant="h6">{texts.GENERAL}</Typography>
             </Grid>
             <Grid container item direction="row" spacing={2}>
               <Grid item xs={12} sm={10} md={6} lg={4} xl={3}>
                 <VTextField
-                  label="Name"
+                  label={texts.CITY_NAME}
                   name="name"
                   fullWidth
                   disabled={isLoading}

@@ -75,12 +75,10 @@ export const CitiesListing = () => {
 
   return (
     <BaseLayout
-      title="Listagem de cidades"
+      title={texts.CITIES_LISTING_TITLE_TEXT}
       ToolsBar={
         <ListingTools
           showSearchInput
-          searchText={search}
-          newbuttonText="Nova"
           onChangeSearchText={text =>
             setSearchParams({ search: text, page: "1" }, { replace: true })
           }
