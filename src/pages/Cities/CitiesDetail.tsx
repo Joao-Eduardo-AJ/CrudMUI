@@ -113,7 +113,6 @@ export const CitiesDetail = () => {
       title={id === "new" ? "Nova cidade" : name}
       ToolsBar={
         <DetailTools
-          newButtonText="Nova"
           showButtonSaveAndClose
           showButtonNew={id !== "new"}
           showButtonDelete={id !== "new"}

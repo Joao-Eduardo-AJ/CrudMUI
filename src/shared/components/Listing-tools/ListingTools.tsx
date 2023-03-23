@@ -10,12 +10,11 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Box } from "@mui/system";
 
 import { Environment } from "../../environment";
+import { TextsProvider } from "../../../translation/text-tools";
 
 interface IListingTools {
-  searchText?: string;
   showSearchInput?: boolean;
   onChangeSearchText?: (novoTexto: string) => void;
-  newbuttonText?: string;
   showNewButton?: boolean;
   onClickNew?: () => void;
 }
@@ -23,12 +22,11 @@ interface IListingTools {
 export const ListingTools = ({
   onChangeSearchText,
   showSearchInput = false,
-  searchText = "",
   onClickNew,
   showNewButton = true,
-  newbuttonText = "Novo",
 }: IListingTools) => {
   const theme = useTheme();
+  const texts = TextsProvider.get();
 
   return (
     <Box
@@ -45,7 +43,7 @@ export const ListingTools = ({
         <TextField
           size="small"
           placeholder={Environment.SEARCH_INPUT}
-          value={searchText}
+          value={texts.SEARCH_TEXT}
           onChange={e => onChangeSearchText?.(e.target.value)}
           InputProps={{
             startAdornment: (
@@ -65,7 +63,7 @@ export const ListingTools = ({
             endIcon={<Icon>add</Icon>}
             onClick={onClickNew}
           >
-            {newbuttonText}
+            {texts.NEW_BUTTON_TEXT}
           </Button>
         )}
       </Box>

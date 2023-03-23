@@ -6,12 +6,6 @@
       "id": 2
     },
     {
-      "wholeName": "Lucas Vieira",
-      "email": "Lucas Vieira@gmail.com",
-      "cityId": "123",
-      "id": 3
-    },
-    {
       "id": 4,
       "idCity": 1,
       "email": "Tamires@gmail.com",
@@ -92,10 +86,6 @@
   ],
   "cities": [
     {
-      "id": 1,
-      "name": "Tramandaí"
-    },
-    {
       "id": 2,
       "name": "Canoas"
     },
@@ -113,7 +103,8 @@
     }
   ],
   "auth": {
-  "accessToken": [
-    "aaa-bbb-ccc"
-  ]}
+    "accessToken": [
+      "aaa-bbb-ccc"
+    ]
+  }
 }

@@ -9,9 +9,8 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-
+import { TextsProvider } from "../../../translation/text-tools";
 interface IDetailToolsProps {
-  newButtonText?: string;
   showButtonNew?: boolean;
   showButtonBack?: boolean;
   showButtonDelete?: boolean;
@@ -32,7 +31,6 @@ interface IDetailToolsProps {
 }
 
 export function DetailTools({
-  newButtonText = "novo",
   showButtonNew = true,
   showButtonBack = true,
   showButtonDelete = true,
@@ -54,6 +52,7 @@ export function DetailTools({
   const theme = useTheme();
   const smDown = useMediaQuery(theme.breakpoints.down("sm"));
   const mdDown = useMediaQuery(theme.breakpoints.down("sm"));
+  const texts = TextsProvider.get();
 
   return (
     <Box
@@ -80,7 +79,7 @@ export function DetailTools({
             textOverflow="ellipsis"
             overflow="hidden"
           >
-            Salvar
+            {texts.SAVE_BUTTON_TEXT}
           </Typography>
         </Button>
       )}
@@ -102,7 +101,7 @@ export function DetailTools({
               textOverflow="ellipsis"
               overflow="hidden"
             >
-              Salvar e voltar
+              {texts.SAVE_AND_RETURN_BUTTON_TEXT}
             </Typography>
           </Button>
         )}
@@ -123,7 +122,7 @@ export function DetailTools({
             textOverflow="ellipsis"
             overflow="hidden"
           >
-            Apagar
+            {texts.DELETE_BUTTON_TEXT}
           </Typography>
         </Button>
       )}
@@ -142,7 +141,7 @@ export function DetailTools({
             textOverflow="ellipsis"
             overflow="hidden"
           >
-            {newButtonText}
+            {texts.NEW_BUTTON_TEXT}
           </Typography>
         </Button>
       )}
@@ -168,7 +167,7 @@ export function DetailTools({
             textOverflow="ellipsis"
             overflow="hidden"
           >
-            Voltar
+            {texts.RETURN_BUTTON_TEXT}
           </Typography>
         </Button>
       )}
