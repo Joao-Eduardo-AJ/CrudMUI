@@ -3,6 +3,7 @@ import { useField } from "@unform/core";
 import { useEffect, useMemo, useState } from "react";
 import { useDebounce } from "../../../shared/hooks";
 import { CitiesService } from "../../../shared/services/api/cities/CitiesService";
+import { TextsProvider } from "../../../translation/autocomplete";
 
 interface IAutoCompleteOptions {
   id: number;
@@ -19,6 +20,7 @@ export const CityAutoComplete = ({
   const { fieldName, registerField, defaultValue, error, clearError } =
     useField("idCity");
   const { debounce } = useDebounce();
+  const texts = TextsProvider.get();
 
   const [options, setOptions] = useState<IAutoCompleteOptions[]>([]);
   const [selectedId, setSelectedId] = useState<number | undefined>(
@@ -66,10 +68,10 @@ export const CityAutoComplete = ({
 
   return (
     <Autocomplete
-      openText="Abrir"
-      closeText="Fechar"
-      noOptionsText="Sem opções"
-      loadingText="Carregando..."
+      openText={texts.OPEN_TEXT}
+      closeText={texts.CLOSE_TEXT}
+      noOptionsText={texts.NO_OPTION_TEXT}
+      loadingText={texts.LOADING_TEXT}
       disablePortal
       options={options}
       loading={isLoading}
@@ -83,7 +85,7 @@ export const CityAutoComplete = ({
       renderInput={params => (
         <TextField
           {...params}
-          label="city"
+          label={texts.LABEL}
           error={!!error}
           helperText={error}
         />
