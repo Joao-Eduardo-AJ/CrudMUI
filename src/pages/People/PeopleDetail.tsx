@@ -8,6 +8,7 @@ import { DetailTools } from "../../shared/components";
 import { BaseLayout } from "../../shared/layouts";
 import { PeopleService } from "../../shared/services/api/people/PeopleService";
 import { CityAutoComplete } from "./components/CityAutoComplete";
+import { TextsProvider } from "../../translation/people-listing";
 
 interface IFormData {
   wholeName: string;
@@ -25,6 +26,7 @@ export const PeopleDetail = () => {
   const { id = "new" } = useParams<"id">();
   const navigate = useNavigate();
   const { formRef, save, saveAndClose, isSaveAndClose } = useVForm();
+  const texts = TextsProvider.get();
 
   const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState("");
@@ -119,10 +121,9 @@ export const PeopleDetail = () => {
 
   return (
     <BaseLayout
-      title={id === "new" ? "Nova pessoa" : name}
+      title={id === "new" ? texts.NEW_PERSON_TITLE_TEXT : name}
       ToolsBar={
         <DetailTools
-          newButtonText="Nova"
           showButtonSaveAndClose
           showButtonNew={id !== "new"}
           showButtonDelete={id !== "new"}
@@ -144,12 +145,12 @@ export const PeopleDetail = () => {
             )}
 
             <Grid item>
-              <Typography variant="h6">Geral</Typography>
+              <Typography variant="h6">{texts.GENERAL}</Typography>
             </Grid>
             <Grid container item direction="row" spacing={2}>
               <Grid item xs={12} sm={10} md={6} lg={4} xl={3}>
                 <VTextField
-                  label="wholeName"
+                  label={texts.WHOLE_NAME}
                   name="wholeName"
                   fullWidth
                   disabled={isLoading}
@@ -160,7 +161,7 @@ export const PeopleDetail = () => {
             <Grid container item direction="row" spacing={2}>
               <Grid item xs={12} sm={10} md={6} lg={4} xl={3}>
                 <VTextField
-                  label="email"
+                  label={texts.EMAIL}
                   name="email"
                   fullWidth
                   disabled={isLoading}
