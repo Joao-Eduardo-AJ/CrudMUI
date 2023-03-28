@@ -1,32 +1,32 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { setLocale } from "yup";
+import { TextsProvider } from "../../translation/yup";
+
+const texts = TextsProvider.get();
 
 setLocale({
   mixed: {
-    default: "Campo não é válido",
-    required: "O campo é obrigatório",
+    default: texts.MIXED_DEFAULT,
+    required: texts.MIXED_REQUIRED,
   },
   string: {
-    email: () => "O campo precisa conter um email válido",
-    max: ({ max }) => `O campo pode ter no máximo ${max} caracteres`,
-    min: ({ min }) => `O campo precisa ter pelo menos ${min} caracteres`,
-    length: ({ length }) =>
-      `O campo precisa ter exatamente ${length} caracteres`,
+    email: () => texts.STRING_EMAIL,
+    max: ({ max }) => `${texts.STRING_MAX} ${max} ${texts.CHARACTERS}`,
+    min: ({ min }) => `${texts.STRING_MIN} ${min} ${texts.CHARACTERS}`,
+    length: ({ length }) => `${texts.STRING_MAX} ${length} ${texts.CHARACTERS}`,
   },
   date: {
-    max: ({ max }) => `A data deve ser menor que ${max}`,
-    min: ({ min }) => `A data deve ser maior que ${min}`,
+    max: ({ max }) => `${texts.DATE_MAX} ${max}`,
+    min: ({ min }) => `${texts.DATE_MIN} ${min}`,
   },
   number: {
-    integer: () => "O campo precisa ter um valor inteiro",
-    negative: () => "O campo precisa ter um valor negativo",
-    positive: () => "O campo precisa ter um valor positivo",
-    moreThan: ({ more }) => `O campo precisa ter um valor maior que ${more}`,
-    lessThan: ({ less }) => `O campo precisa ter um valor menor que ${less}`,
-    min: ({ min }) =>
-      `O campo precisa ter um valor com mais de ${min} caracteres`,
-    max: ({ max }) =>
-      `O campo precisa ter um valor com menos de ${max} caracteres`,
+    integer: () => texts.NUMBER_INTEGER,
+    negative: () => texts.NUMBER_NEGATIVE,
+    positive: () => texts.NUMBER_POSITIVE,
+    moreThan: ({ more }) => `${texts.NUMBER_BIGGER_THAN} ${more}`,
+    lessThan: ({ less }) => `${texts.NUMBER_SMALLER_THAN} ${less}`,
+    min: ({ min }) => `${texts.NUMBER_MIN} ${min}  ${texts.CHARACTERS}`,
+    max: ({ max }) => `${texts.NUMBER_MAX}  ${max}  ${texts.CHARACTERS}`,
   },
   boolean: {},
   object: {},
