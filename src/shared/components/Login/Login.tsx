@@ -13,6 +13,7 @@ import { useState } from "react";
 import * as yup from "yup";
 
 import { useAuthContext } from "../../contexts";
+import { TextsProvider } from "../../../translation/login";
 
 const loginSchema = yup.object().shape({
   email: yup.string().email().required(),
@@ -25,6 +26,7 @@ interface ILoginProps {
 
 export const Login = ({ children }: ILoginProps) => {
   const { isAuthenticated, login } = useAuthContext();
+  const texts = TextsProvider.get();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -68,12 +70,12 @@ export const Login = ({ children }: ILoginProps) => {
         <CardContent>
           <Box display="flex" flexDirection="column" gap={2} width="16rem">
             <Typography variant="h5" align="center">
-              Login
+              {texts.LOGIN}
             </Typography>
             <TextField
               fullWidth
               value={email}
-              label="Email"
+              label={texts.EMAIL}
               type="email"
               disabled={isLoading}
               error={!!emailError}
@@ -84,7 +86,7 @@ export const Login = ({ children }: ILoginProps) => {
             <TextField
               fullWidth
               value={password}
-              label="Senha"
+              label={texts.PASSWORD}
               type="password"
               disabled={isLoading}
               error={!!passwordError}
@@ -110,7 +112,7 @@ export const Login = ({ children }: ILoginProps) => {
                 ) : undefined
               }
             >
-              Entrar
+              {texts.LOGIN}
             </Button>
           </Box>
         </CardActions>
