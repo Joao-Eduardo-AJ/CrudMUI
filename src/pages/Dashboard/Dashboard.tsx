@@ -62,7 +62,7 @@ export const Dashboard = () => {
                       <Typography variant="h1">{totalPeopleCount}</Typography>
                     )}
                     {isPeopleLoading && (
-                      <Typography variant="h6">Carregando...</Typography>
+                      <Typography variant="h6">{texts.LOADING_TEXT}</Typography>
                     )}
                   </Box>
                 </CardContent>
@@ -84,7 +84,7 @@ export const Dashboard = () => {
                       <Typography variant="h1">{totalCitiesCount}</Typography>
                     )}
                     {isCitiesLoading && (
-                      <Typography variant="h6">Carregando...</Typography>
+                      <Typography variant="h6">{texts.LOADING_TEXT}</Typography>
                     )}
                   </Box>
                 </CardContent>
