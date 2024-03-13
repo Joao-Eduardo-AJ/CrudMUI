@@ -36,5 +36,5 @@ yarn server
 
 ### Thanks for the visit! 
 Contact me on 
-[@LinkedIn](https://www.linkedin.com/in/joao-eduardo-2000s/) or
+[@LinkedIn](https://www.linkedin.com/in/joaoeduardoaj/) or
 [@WhatsApp](https://wa.me/qr/MV4NC2VANIZRC1)
